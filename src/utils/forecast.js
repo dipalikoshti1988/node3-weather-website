@@ -13,13 +13,20 @@ const forecast = (latitude, longitude, callback) => {
       callback("Unable to find location!", undefined);
     } else {
       const data = response.body;
-      //   console.log(data.currently);
+      //console.log(data.currently);
       const summary = data.daily.data[0].summary;
       const temperature = data.currently.temperature;
       const precipProbability = data.currently.precipProbability;
       const newData = `${summary} It is currenty ${temperature} degrees out. There is a ${precipProbability}% chance of rain`;
-      callback(undefined, newData);
-      //   console.log(
+      const daytemperatureLow = ` \n.Today's low temerature is ${data.daily.data[0].temperatureLow}`;
+      const daytemperatureHigh = ` \n.Today's high temerature is ${data.daily.data[0].temperatureHigh}`;
+      callback(
+        undefined,
+        `${newData} ${daytemperatureLow} ${daytemperatureHigh}`
+      );
+      // callback(undefined, daytemperatureLow);
+      // callback(undefined, daytemperatureHigh);
+      // //   console.log(
       //     `${data.daily.data[0].summary} It is currenty ${data.currently.temperature} degrees out. There is a ${data.currently.precipProbability}% chance of rain`
       //   );
     }
